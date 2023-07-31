@@ -6,7 +6,9 @@
 
 ![Gradle Compatible](https://img.shields.io/badge/Gradle%20Compatible-green?logo=gradle)
 
-[![Latest Releases](https://badgen.net/github/tag/WSCSports/blaze-sample-android?label=latest+release)](https://github.com/WSCSports/blaze-sample-android/releases)
+[![Latest Releases](https://badgen.net/github/release/WSCSports/blaze-sample-android)](https://github.com/WSCSports/blaze-sample-android/releases)
+
+
 
 Use this repo as a reference for integrating Blaze sdk in your Android App.
 
