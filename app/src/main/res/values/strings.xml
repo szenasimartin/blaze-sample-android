@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Blaze Sample App</string>
+
+
+    <string name="recent_stories">Recent Stories</string>
+    <string name="top_stories">Top Stories</string>
+
+</resources>
