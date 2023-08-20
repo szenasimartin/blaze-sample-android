@@ -4,13 +4,14 @@ import android.app.Application
 import com.blaze.blazesdk.BlazeSDK
 import com.blaze.blazesdk.core.managers.CachingLevel
 
+/** Use the [Application] class to initialize the BlazeSDK.
+ * Note - you won't be able to use BlazeSDK before calling BlazeSDK.init
+ * */
 class Application : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        /*
-           The SDK requires initialization by using a valid API key
-            */
+
         BlazeSDK.init(
             // Please provide valid API-KEY here
             apiKey = "[API-KEY]",
@@ -25,8 +26,6 @@ class Application : Application() {
                 logd("BlazeSDK.init errorBlock -> , Init Error = $error")
             }
         )
-
-
     }
 
 }

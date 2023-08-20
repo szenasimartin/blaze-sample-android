@@ -1,8 +1,16 @@
 <resources>
     <string name="app_name">Blaze Sample App</string>
 
-
+    <!--  Stories  -->
     <string name="recent_stories">Recent Stories</string>
     <string name="top_stories">Top Stories</string>
+
+    <!--  Moments  -->
+    <string name="best_moments">Best Moments</string>
+    <string name="top_Moments">Top Moments</string>
+
+    <!--  Bottom Nav Bar  -->
+    <string name="nav_bar_stories">Stories</string>
+    <string name="nav_bar_moments">Moments</string>
 
 </resources>

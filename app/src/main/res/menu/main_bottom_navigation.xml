@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/storiesFragment"
+        android:title="@string/nav_bar_stories" />
+
+    <item
+        android:id="@+id/momentsFragment"
+        android:title="@string/nav_bar_moments" />
+
+</menu>
