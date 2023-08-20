@@ -13,3 +13,14 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# files for the dex VM
+*.dex
+
+#Build time files
+*.apk
+*.ap_
+*.aab
+.idea
+app/debug/output-metadata.json
+app/release/output-metadata.json
