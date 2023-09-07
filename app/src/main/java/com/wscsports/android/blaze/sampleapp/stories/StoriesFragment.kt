@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.blaze.blazesdk.core.analytics.models.BlazeAnalyticsEvent
 import com.blaze.blazesdk.core.models.BlazeResult
+import com.blaze.blazesdk.core.theme.player.BlazeScaleType
 import com.blaze.blazesdk.features.stories.models.ui.CtaTypeModel
 import com.blaze.blazesdk.features.widgets.labels.BlazeDataSourceType
 import com.blaze.blazesdk.features.widgets.labels.BlazeWidgetLabel
@@ -69,10 +70,17 @@ class StoriesFragment : Fragment(R.layout.fragment_stories) {
 
     private fun initRowWidget() {
         // Using default Preset
-        val presetCircleWidget = BlazeStoriesTilesPresets.ROW_WIDGET_CIRCLE
+        val storiesRowPreset = BlazeStoriesTilesPresets.ROW_WIDGET_CIRCLE
+
+        //You can modify onboarding experience by setting firstTimeSlide in playerTheme
+        //storiesRowPreset.playerTheme.firstTimeSlide.mainTitle.text ="Moments First Time Slide Title"
+
+        //You can modify player buttons experience by setting buttons scaleType in playerTheme
+        //storiesRowPreset.playerTheme.buttons.exitButton.scaleType = BlazeScaleType.FIT_XY
+
 
         binding?.storyRowWidget?.initWidget(
-            blazeStoryTheme = presetCircleWidget,
+            blazeStoryTheme = storiesRowPreset,
             dataSource = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("live-stories")),
             widgetId = "live-stories-row",
             onItemClicked = { item ->
@@ -87,14 +95,20 @@ class StoriesFragment : Fragment(R.layout.fragment_stories) {
 
     private fun initGridWidget() {
         // Using default Preset
-        val presetGridWidget = BlazeStoriesTilesPresets.GRID_WIDGET_RECTANGLE_2_COL
+        val storiesGridPreset = BlazeStoriesTilesPresets.GRID_WIDGET_RECTANGLE_2_COL
+
+        //You can modify onboarding experience by setting firstTimeSlide in playerTheme
+        //storiesGridPreset.playerTheme.firstTimeSlide.mainTitle.text ="Moments First Time Slide Title"
+
+        //You can modify player buttons experience by setting buttons scaleType in playerTheme
+        //storiesGridPreset.playerTheme.buttons.exitButton.scaleType = BlazeScaleType.FIT_XY
 
         // We can modify the given presets. i.e.,
         // Limit the amount of items shown on the widget level
-        presetGridWidget.widgetLayout.maxDisplayItemsCount = 4
+        storiesGridPreset.widgetLayout.maxDisplayItemsCount = 4
 
         binding?.storyGridWidget?.initWidget(
-            blazeStoryTheme = presetGridWidget,
+            blazeStoryTheme = storiesGridPreset,
             dataSource = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("top-stories")),
             widgetId = "top-stories-grid",
             onItemClicked = { item ->
