@@ -9,4 +9,8 @@
         android:id="@+id/momentsFragment"
         android:title="@string/nav_bar_moments" />
 
+    <item
+        android:id="@+id/momentsContainerFragment"
+        android:title="@string/nav_bar_moments_container" />
+
 </menu>

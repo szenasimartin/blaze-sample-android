@@ -24,10 +24,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.blaze.blazesdk.features.stories.widgets.row.WidgetsRowList
+        <com.blaze.blazesdk.features.stories.widgets.row.StoriesWidgetsRowList
             android:id="@+id/storyRowWidget"
             android:layout_width="0dp"
-            android:layout_height="140dp"
+            android:layout_height="160dp"
             android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/storyRowWidget" />
 
-        <com.blaze.blazesdk.features.stories.widgets.grid.WidgetsGridList
+        <com.blaze.blazesdk.features.stories.widgets.grid.StoriesWidgetsGridList
             android:id="@+id/storyGridWidget"
             android:layout_width="0dp"
             android:layout_height="0dp"
