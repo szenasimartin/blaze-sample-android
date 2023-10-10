@@ -21,4 +21,12 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/momentsContainerFragment"
+        android:name="com.wscsports.android.blaze.sampleapp.container.MomentsContainerFragment"
+        android:label="fragment_container_moments"
+        tools:layout="@layout/fragment_container_moments">
+
+    </fragment>
+
 </navigation>

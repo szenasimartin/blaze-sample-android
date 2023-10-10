@@ -12,5 +12,6 @@
     <!--  Bottom Nav Bar  -->
     <string name="nav_bar_stories">Stories</string>
     <string name="nav_bar_moments">Moments</string>
+    <string name="nav_bar_moments_container">Container</string>
 
 </resources>
