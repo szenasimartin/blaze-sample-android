@@ -28,7 +28,6 @@
             android:id="@+id/momentsRowWidget"
             android:layout_width="0dp"
             android:layout_height="140dp"
-            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recentMomentsTitle" />
@@ -52,7 +51,6 @@
             android:id="@+id/momentsGridWidget"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
             android:layout_marginVertical="@dimen/activity_vertical_margin"
             android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
