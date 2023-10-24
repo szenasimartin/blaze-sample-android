@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.blaze.blazesdk.core.analytics.models.BlazeAnalyticsEvent
 import com.blaze.blazesdk.core.models.BlazeResult
-import com.blaze.blazesdk.core.theme.player.BlazeScaleType
 import com.blaze.blazesdk.features.stories.models.ui.CtaTypeModel
 import com.blaze.blazesdk.features.widgets.labels.BlazeDataSourceType
 import com.blaze.blazesdk.features.widgets.labels.BlazeWidgetLabel
@@ -70,7 +69,7 @@ class MomentsFragment : Fragment(R.layout.fragment_moments) {
 
     private fun initRowWidget() {
         // Using default Preset
-        val momentsRowPreset = BlazeMomentPresetThemes.MOMENT_THEME
+        val momentsRowPreset = BlazeMomentPresetThemes.ROW_WIDGET_RECTANGLE
         //You can modify onboarding experience by setting firstTimeSlide in playerTheme
         //momentsRowPreset.playerTheme.firstTimeSlide.mainTitle.text ="Moments First Time Slide Title"
 
@@ -93,7 +92,7 @@ class MomentsFragment : Fragment(R.layout.fragment_moments) {
 
     private fun initGridWidget() {
         // Using default Preset
-        val momentsGridPreset = BlazeMomentPresetThemes.MOMENT_THEME
+        val momentsGridPreset = BlazeMomentPresetThemes.ROW_WIDGET_RECTANGLE
 
         //You can modify onboarding experience by setting firstTimeSlide in playerTheme
         //momentsGridPreset.playerTheme.firstTimeSlide.mainTitle.text ="Moments First Time Slide Title"

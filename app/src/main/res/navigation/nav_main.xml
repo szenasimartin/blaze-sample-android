@@ -29,4 +29,11 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/composeFragment"
+        android:name="com.wscsports.android.blaze.sampleapp.compose.RecentLeaguesFragment"
+        android:label="fragment_compose">
+
+    </fragment>
+
 </navigation>

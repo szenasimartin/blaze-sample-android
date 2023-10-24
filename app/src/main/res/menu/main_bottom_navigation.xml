@@ -3,14 +3,22 @@
 
     <item
         android:id="@+id/storiesFragment"
+        android:icon="@drawable/ic_tab_stories"
         android:title="@string/nav_bar_stories" />
 
     <item
         android:id="@+id/momentsFragment"
+        android:icon="@drawable/ic_tab_moments"
         android:title="@string/nav_bar_moments" />
 
     <item
         android:id="@+id/momentsContainerFragment"
+        android:icon="@drawable/ic_tab_moments_container"
         android:title="@string/nav_bar_moments_container" />
+
+    <item
+        android:id="@+id/composeFragment"
+        android:icon="@drawable/ic_tab_recent_leagues"
+        android:title="@string/nav_bar_recent_leagues" />
 
 </menu>

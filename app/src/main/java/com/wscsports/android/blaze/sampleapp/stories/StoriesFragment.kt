@@ -7,12 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.blaze.blazesdk.core.analytics.models.BlazeAnalyticsEvent
 import com.blaze.blazesdk.core.models.BlazeResult
-import com.blaze.blazesdk.core.theme.player.BlazeScaleType
 import com.blaze.blazesdk.features.stories.models.ui.CtaTypeModel
 import com.blaze.blazesdk.features.widgets.labels.BlazeDataSourceType
 import com.blaze.blazesdk.features.widgets.labels.BlazeWidgetLabel
 import com.blaze.blazesdk.features.widgets.shared.GlobalDelegates
-import com.blaze.blazesdk.presets.BlazeStoriesTilesPresets
+import com.blaze.blazesdk.presets.BlazeStoriesPresetThemes
 import com.wscsports.android.blaze.sampleapp.R
 import com.wscsports.android.blaze.sampleapp.databinding.FragmentStoriesBinding
 import com.wscsports.android.blaze.sampleapp.logd
@@ -70,7 +69,7 @@ class StoriesFragment : Fragment(R.layout.fragment_stories) {
 
     private fun initRowWidget() {
         // Using default Preset
-        val storiesRowPreset = BlazeStoriesTilesPresets.ROW_WIDGET_CIRCLE
+        val storiesRowPreset = BlazeStoriesPresetThemes.ROW_WIDGET_CIRCLE
 
         //You can modify onboarding experience by setting firstTimeSlide in playerTheme
         //storiesRowPreset.playerTheme.firstTimeSlide.mainTitle.text ="Moments First Time Slide Title"
@@ -95,7 +94,7 @@ class StoriesFragment : Fragment(R.layout.fragment_stories) {
 
     private fun initGridWidget() {
         // Using default Preset
-        val storiesGridPreset = BlazeStoriesTilesPresets.GRID_WIDGET_RECTANGLE_2_COL
+        val storiesGridPreset = BlazeStoriesPresetThemes.GRID_WIDGET_RECTANGLE_2_COL
 
         //You can modify onboarding experience by setting firstTimeSlide in playerTheme
         //storiesGridPreset.playerTheme.firstTimeSlide.mainTitle.text ="Moments First Time Slide Title"

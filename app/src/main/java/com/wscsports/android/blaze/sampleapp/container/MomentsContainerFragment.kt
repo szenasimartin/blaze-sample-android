@@ -102,7 +102,7 @@ class MomentsContainerFragment: Fragment(R.layout.fragment_container_moments) {
 
         // Initializing the BlazeMomentsPlayerContainer instance
         momentsPlayerContainer = BlazeMomentsPlayerContainer(
-            dataSource = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("<SOME_LABEL>")),
+            dataSource = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("moments")),
             shouldPrepareContent = false,
             containerId = "<UNIQUE_CONTAINER_ID",
             momentsPlayerTheme = momentsPlayerTheme,
