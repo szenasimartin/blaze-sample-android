@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.blaze.blazesdk.core.analytics.models.BlazeAnalyticsEvent
 import com.blaze.blazesdk.core.models.BlazeResult
+import com.blaze.blazesdk.features.ads.models.BlazeStoriesAdsConfigType
 import com.blaze.blazesdk.features.stories.models.ui.CtaTypeModel
 import com.blaze.blazesdk.features.widgets.labels.BlazeDataSourceType
 import com.blaze.blazesdk.features.widgets.labels.BlazeWidgetLabel
@@ -77,6 +78,10 @@ class StoriesFragment : Fragment(R.layout.fragment_stories) {
         //You can modify player buttons experience by setting buttons scaleType in playerTheme
         //storiesRowPreset.playerTheme.buttons.exitButton.scaleType = BlazeScaleType.FIT_XY
 
+        // Example of customizing ads configuration
+        binding?.storyRowWidget?.updateAdsConfigType(
+            BlazeStoriesAdsConfigType.EVERY_X_STORIES
+        )
 
         binding?.storyRowWidget?.initWidget(
             blazeStoryTheme = storiesRowPreset,
@@ -105,6 +110,11 @@ class StoriesFragment : Fragment(R.layout.fragment_stories) {
         // We can modify the given presets. i.e.,
         // Limit the amount of items shown on the widget level
         storiesGridPreset.widgetLayout.maxDisplayItemsCount = 4
+
+        // Example of customizing ads configuration
+        binding?.storyRowWidget?.updateAdsConfigType(
+            BlazeStoriesAdsConfigType.FIXED_PAGES_INDEX
+        )
 
         binding?.storyGridWidget?.initWidget(
             blazeStoryTheme = storiesGridPreset,

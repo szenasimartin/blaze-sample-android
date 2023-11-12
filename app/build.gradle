@@ -2,8 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
-//BLAZE SDK 0.20.0
-def blazeSDK = '0.20.0'
+//BLAZE SDK 0.20.8
+def blazeSDK = '0.20.8'
 
 android {
     namespace 'com.wscsports.android.blaze.sampleapp'
@@ -76,6 +76,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.0'
     implementation 'androidx.navigation:navigation-compose:2.7.0'
 
+    //Google Mobile Ads SDK
+    implementation 'com.google.android.gms:play-services-ads:22.4.0'
+    implementation 'com.google.android.gms:play-services-ads-lite:22.4.0'
 
     implementation group: "com.blaze", name: "blazesdk", version: "${blazeSDK}"
 
