@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import com.blaze.blazesdk.core.models.BlazeResult
 import com.blaze.blazesdk.features.compose.StoriesWidgetsRow
+import com.blaze.blazesdk.features.compose.WidgetStoriesStateHandler
 import com.blaze.blazesdk.features.stories.models.ui.CtaTypeModel
 import com.blaze.blazesdk.features.widgets.labels.BlazeDataSourceType
 import com.blaze.blazesdk.features.widgets.labels.BlazeWidgetLabel
@@ -117,19 +118,22 @@ class RecentLeaguesFragment : Fragment() {
                 val rowHeight = screenWidth * (9f / 16f) // Calculating height (using 16:9 ratio).
                 val horizontalMargin = 8 // In dp
                 val calculatedRowHeight = rowHeight - horizontalMargin
+                val widgetRowLiveStoriesId = "live-stories-widget-row-compose"
+                val widgetRowLiveStoriesHandler = WidgetStoriesStateHandler(widgetRowLiveStoriesId)
 
                 StoriesWidgetsRow(
                     modifier = Modifier
                         .height(calculatedRowHeight.dp)
                         .fillMaxWidth(),
                     blazeStoryTheme = BlazeStoriesPresetThemes.WIDGET_HORIZONTAL_RECTANGLE_SINGLE_ITEM,
-                    dataSourceType =  BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("live-stories")),
-                    widgetId = "live-stories-widget-row-compose",
+                    dataSourceType = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("live-stories")),
+                    widgetId = widgetRowLiveStoriesId,
                     onItemClicked = { },
                     onWidgetDataLoadStarted = ::onWidgetDataLoadStarted,
                     onWidgetDataLoadCompleted = ::onWidgetDataLoadCompleted,
                     onWidgetPlayerDismissed = ::onWidgetPlayerDismissed,
-                    onTriggerCTA = ::onTriggerCTA
+                    onTriggerCTA = ::onTriggerCTA,
+                    widgetStoriesStateHandle = widgetRowLiveStoriesHandler
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -137,19 +141,22 @@ class RecentLeaguesFragment : Fragment() {
                 BlazeTitle(
                     title = resources.getString(R.string.top_stories)
                 )
+                val widgetRowTopStoriesId = "top-stories-widget-row-compose"
+                val widgetRowTopStoriesHandler = WidgetStoriesStateHandler(widgetRowTopStoriesId)
 
                 StoriesWidgetsRow(
                     modifier = Modifier
                         .height(calculatedRowHeight.dp)
                         .fillMaxWidth(),
                     blazeStoryTheme = BlazeStoriesPresetThemes.WIDGET_HORIZONTAL_RECTANGLE_SINGLE_ITEM,
-                    dataSourceType =  BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("top-stories")),
-                    widgetId = "top-stories-widget-row-compose",
+                    dataSourceType = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("top-stories")),
+                    widgetId = widgetRowTopStoriesId,
                     onItemClicked = { },
                     onWidgetDataLoadStarted = ::onWidgetDataLoadStarted,
                     onWidgetDataLoadCompleted = ::onWidgetDataLoadCompleted,
                     onWidgetPlayerDismissed = ::onWidgetPlayerDismissed,
-                    onTriggerCTA = ::onTriggerCTA
+                    onTriggerCTA = ::onTriggerCTA,
+                    widgetStoriesStateHandle = widgetRowTopStoriesHandler
                 )
             }
         }

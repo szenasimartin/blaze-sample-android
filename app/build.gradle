@@ -2,8 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
-//BLAZE SDK 0.20.8
-def blazeSDK = '0.20.8'
+//BLAZE SDK 0.20.9
+def blazeSDK = '0.20.9'
 
 android {
     namespace 'com.wscsports.android.blaze.sampleapp'
@@ -52,33 +52,33 @@ android {
 
 dependencies {
 
-    implementation "androidx.compose.ui:ui:1.5.0"
-    implementation "androidx.compose.ui:ui-tooling-preview:1.5.0"
-    implementation "androidx.compose.material:material:1.5.0-beta02"
-    implementation 'androidx.activity:activity-compose:1.7.2'
+    implementation "androidx.compose.ui:ui:1.5.4"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.5.4"
+    implementation "androidx.compose.material:material:1.6.0-alpha08"
+    implementation 'androidx.activity:activity-compose:1.8.0'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
 
-    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
-    implementation 'androidx.compose.material3:material3:1.2.0-alpha05'
+    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'androidx.compose.material3:material3:1.2.0-alpha10'
 
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.constraintlayout:constraintlayout-compose:1.0.1'
 
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
-    implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.6.1'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.2'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
+    implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.6.2'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2'
 
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.7.0'
-    implementation 'androidx.navigation:navigation-compose:2.7.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.5'
+    implementation 'androidx.navigation:navigation-compose:2.7.5'
 
     //Google Mobile Ads SDK
-    implementation 'com.google.android.gms:play-services-ads:22.4.0'
-    implementation 'com.google.android.gms:play-services-ads-lite:22.4.0'
+    implementation 'com.google.android.gms:play-services-ads:22.5.0'
+    implementation 'com.google.android.gms:play-services-ads-lite:22.5.0'
 
     implementation group: "com.blaze", name: "blazesdk", version: "${blazeSDK}"
 
