@@ -33,6 +33,11 @@ class MomentsFragment : Fragment(R.layout.fragment_moments) {
         initGlobalDelegates()
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding?.momentsPullToRefresh?.isRefreshing = false
+    }
+
     /**
      * Global delegates
      * */

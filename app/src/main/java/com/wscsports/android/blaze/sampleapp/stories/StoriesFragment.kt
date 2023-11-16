@@ -34,6 +34,11 @@ class StoriesFragment : Fragment(R.layout.fragment_stories) {
         initGlobalDelegates()
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding?.storiesPullToRefresh?.isRefreshing = false
+    }
+
     /**
      * Global delegates
      * */

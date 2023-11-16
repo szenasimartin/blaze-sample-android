@@ -96,6 +96,37 @@ class RecentLeaguesFragment : Fragment() {
     @Composable
     fun ComposeFragmentLayout() {
 
+        val screenWidth = LocalConfiguration.current.screenWidthDp // Device screen width
+        val rowHeight = screenWidth * (9f / 16f) // Calculating height (using 16:9 ratio).
+        val horizontalMargin = 8 // In dp
+        val calculatedRowHeight = rowHeight - horizontalMargin
+
+        val widgetRowLiveStoriesId = "live-stories-widget-row-compose"
+        val widgetRowLiveStoriesHandler = WidgetStoriesStateHandler(
+            widgetId = widgetRowLiveStoriesId,
+            blazeStoryTheme = BlazeStoriesPresetThemes.WIDGET_HORIZONTAL_RECTANGLE_SINGLE_ITEM,
+            dataSourceType = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("live-stories")),
+            maxItemsFromAPI = null,
+            onItemClicked = { },
+            onWidgetDataLoadStarted = ::onWidgetDataLoadStarted,
+            onWidgetDataLoadCompleted = ::onWidgetDataLoadCompleted,
+            onWidgetPlayerDismissed = ::onWidgetPlayerDismissed,
+            onTriggerCTA = ::onTriggerCTA,
+        )
+
+        val widgetRowTopStoriesId = "top-stories-widget-row-compose"
+        val widgetRowTopStoriesHandler = WidgetStoriesStateHandler(
+            widgetId = widgetRowTopStoriesId,
+            blazeStoryTheme = BlazeStoriesPresetThemes.WIDGET_HORIZONTAL_RECTANGLE_SINGLE_ITEM,
+            dataSourceType = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("top-stories")),
+            onItemClicked = { },
+            onWidgetDataLoadStarted = ::onWidgetDataLoadStarted,
+            onWidgetDataLoadCompleted = ::onWidgetDataLoadCompleted,
+            onWidgetPlayerDismissed = ::onWidgetPlayerDismissed,
+            onTriggerCTA = ::onTriggerCTA,
+        )
+
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -114,25 +145,10 @@ class RecentLeaguesFragment : Fragment() {
                     title = resources.getString(R.string.recent_stories)
                 )
 
-                val screenWidth = LocalConfiguration.current.screenWidthDp // Device screen width
-                val rowHeight = screenWidth * (9f / 16f) // Calculating height (using 16:9 ratio).
-                val horizontalMargin = 8 // In dp
-                val calculatedRowHeight = rowHeight - horizontalMargin
-                val widgetRowLiveStoriesId = "live-stories-widget-row-compose"
-                val widgetRowLiveStoriesHandler = WidgetStoriesStateHandler(widgetRowLiveStoriesId)
-
                 StoriesWidgetsRow(
                     modifier = Modifier
                         .height(calculatedRowHeight.dp)
                         .fillMaxWidth(),
-                    blazeStoryTheme = BlazeStoriesPresetThemes.WIDGET_HORIZONTAL_RECTANGLE_SINGLE_ITEM,
-                    dataSourceType = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("live-stories")),
-                    widgetId = widgetRowLiveStoriesId,
-                    onItemClicked = { },
-                    onWidgetDataLoadStarted = ::onWidgetDataLoadStarted,
-                    onWidgetDataLoadCompleted = ::onWidgetDataLoadCompleted,
-                    onWidgetPlayerDismissed = ::onWidgetPlayerDismissed,
-                    onTriggerCTA = ::onTriggerCTA,
                     widgetStoriesStateHandle = widgetRowLiveStoriesHandler
                 )
 
@@ -141,21 +157,11 @@ class RecentLeaguesFragment : Fragment() {
                 BlazeTitle(
                     title = resources.getString(R.string.top_stories)
                 )
-                val widgetRowTopStoriesId = "top-stories-widget-row-compose"
-                val widgetRowTopStoriesHandler = WidgetStoriesStateHandler(widgetRowTopStoriesId)
 
                 StoriesWidgetsRow(
                     modifier = Modifier
                         .height(calculatedRowHeight.dp)
                         .fillMaxWidth(),
-                    blazeStoryTheme = BlazeStoriesPresetThemes.WIDGET_HORIZONTAL_RECTANGLE_SINGLE_ITEM,
-                    dataSourceType = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("top-stories")),
-                    widgetId = widgetRowTopStoriesId,
-                    onItemClicked = { },
-                    onWidgetDataLoadStarted = ::onWidgetDataLoadStarted,
-                    onWidgetDataLoadCompleted = ::onWidgetDataLoadCompleted,
-                    onWidgetPlayerDismissed = ::onWidgetPlayerDismissed,
-                    onTriggerCTA = ::onTriggerCTA,
                     widgetStoriesStateHandle = widgetRowTopStoriesHandler
                 )
             }
