@@ -105,6 +105,8 @@ class MomentsFragment : Fragment(R.layout.fragment_moments) {
         //You can modify player buttons experience by setting buttons scaleType in playerTheme
         // momentsGridPreset.playerTheme.buttons.exitButton.scaleType = BlazeScaleType.FIT_XY
 
+        //You can modify the end positioning of the bottom gradient.
+        //momentsGridPreset.playerTheme.playerFooterGradient.endPositioning = PlayerFooterGradientPositioning.BOTTOM_TO_CONTAINER
 
         // We can modify the given presets. i.e.,
         // Limit the amount of items shown on the widget level
@@ -164,8 +166,8 @@ class MomentsFragment : Fragment(R.layout.fragment_moments) {
         }
     }
 
-    private fun onEventTriggered(eventType: String, eventData: BlazeAnalyticsEvent) {
-        logd("onEventTriggered - eventType => $eventType, eventData => $eventData")
+    private fun onEventTriggered(eventData: BlazeAnalyticsEvent) {
+        logd("onEventTriggered - eventType => ${eventData.event_action.value}, eventData => $eventData")
     }
 
     private fun onMomentsPlayerDidAppear() {
