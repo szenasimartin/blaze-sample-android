@@ -73,7 +73,7 @@ class MomentsContainerFragment: Fragment(R.layout.fragment_container_moments) {
                 logd("onContainedPlayerDismissed - containerId => $containerId")
             }
 
-            override fun onDataLoadCompleted(containerId: String, itemsCount: Int, result: BlazeResult<Any>?) {
+            override fun onDataLoadCompleted(containerId: String, itemsCount: Int, result: BlazeResult<Unit>?) {
                 logd("onDataLoadCompleted - containerId => $containerId, itemsCount => $itemsCount, result => $result")
             }
 

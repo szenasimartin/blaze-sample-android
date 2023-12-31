@@ -1,8 +1,8 @@
-package com.wscsports.android.blaze.sampleapp.ads
+package com.wscsports.android.blaze.sampleapp.ads.custom_native
 
 import android.content.Context
-import com.blaze.blazesdk.features.ads.models.BlazeAdModel
-import com.blaze.blazesdk.features.ads.models.BlazeAdRequestData
+import com.blaze.blazesdk.features.ads.custom_native.models.BlazeAdRequestData
+import com.blaze.blazesdk.features.ads.custom_native.models.BlazeGoogleCustomNativeAdModel
 import com.google.android.gms.ads.MobileAds
 import kotlinx.coroutines.CompletableDeferred
 
@@ -19,8 +19,8 @@ class AdsProvider(context: Context) {
         MobileAds.initialize(context)
     }
 
-    suspend fun generateAd(adRequestData: BlazeAdRequestData): BlazeAdModel? {
-        var resultAd: BlazeAdModel? = null
+    suspend fun generateAd(adRequestData: BlazeAdRequestData): BlazeGoogleCustomNativeAdModel? {
+        var resultAd: BlazeGoogleCustomNativeAdModel? = null
         val nativeAdsManager = NativeAdsManager(context = appContext)
 
         // Load a single ad from Google and wait for it's result to return.

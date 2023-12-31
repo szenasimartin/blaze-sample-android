@@ -1,10 +1,10 @@
-package com.wscsports.android.blaze.sampleapp.ads
+package com.wscsports.android.blaze.sampleapp.ads.custom_native
 
-import com.blaze.blazesdk.features.ads.models.BlazeAdModel
-import com.blaze.blazesdk.features.ads.models.BlazeTrackingPixel
+import com.blaze.blazesdk.features.ads.custom_native.models.BlazeGoogleCustomNativeAdModel
+import com.blaze.blazesdk.features.ads.custom_native.models.BlazeTrackingPixel
 import com.google.android.gms.ads.nativead.NativeCustomFormatAd
 
-fun NativeCustomFormatAd?.toAdModel(): BlazeAdModel? = this?.run {
+fun NativeCustomFormatAd?.toAdModel(): BlazeGoogleCustomNativeAdModel? = this?.run {
     val advertiserName = getText(AdConstants.ADVERTISER_NAME)?.toString()
     val creativeType = getText(AdConstants.CREATIVE_TYPE)?.toString()
     val image = getImage(AdConstants.IMAGE)?.uri?.toString()
@@ -23,15 +23,15 @@ fun NativeCustomFormatAd?.toAdModel(): BlazeAdModel? = this?.run {
         )
     }
 
-    val ctaType: BlazeAdModel.CtaModel.CTAType? = when (clickType) {
-        AdConstants.WEB -> BlazeAdModel.CtaModel.CTAType.WEB
-        AdConstants.IN_APP -> BlazeAdModel.CtaModel.CTAType.DEEPLINK
+    val ctaType: BlazeGoogleCustomNativeAdModel.CtaModel.CTAType? = when (clickType) {
+        AdConstants.WEB -> BlazeGoogleCustomNativeAdModel.CtaModel.CTAType.WEB
+        AdConstants.IN_APP -> BlazeGoogleCustomNativeAdModel.CtaModel.CTAType.DEEPLINK
         else -> null
     }
     val cta = if (ctaType != null &&
         !clickThroughUrl.isNullOrEmpty() &&
         !clickThroughCTA.isNullOrEmpty()) {
-        BlazeAdModel.CtaModel(
+        BlazeGoogleCustomNativeAdModel.CtaModel(
             type = ctaType,
             text = clickThroughCTA,
             url = clickThroughUrl
@@ -40,23 +40,23 @@ fun NativeCustomFormatAd?.toAdModel(): BlazeAdModel? = this?.run {
         null
 
     val content = if (creativeType == AdConstants.DISPLAY && image != null) {
-        BlazeAdModel.Content.Image(urlString = image, duration = 5000.0)
+        BlazeGoogleCustomNativeAdModel.Content.Image(urlString = image, duration = 5000.0)
     } else if (creativeType == AdConstants.VIDEO && video != null) {
         val previewImageUrl = getText(AdConstants.VIDEO_PREVIEW_IMAGE_URL)?.toString()
-        BlazeAdModel.Content.Video(urlString = video, loadingImageUrl = previewImageUrl)
+        BlazeGoogleCustomNativeAdModel.Content.Video(urlString = video, loadingImageUrl = previewImageUrl)
     } else
         null
 
     // Content must be provided.
     content ?: return null
 
-    return BlazeAdModel(
+    return BlazeGoogleCustomNativeAdModel(
         content = content,
         title = advertiserName,
         cta = cta,
         trackingPixelAdList = trackingPixels,
         customAdditionalData = CustomAdData(nativeAd = this),
-        analyticsData = BlazeAdModel.AnalyticsData(
+        analyticsData = BlazeGoogleCustomNativeAdModel.AnalyticsData(
             advertiserId = "some advertiserId",
             advertiserName = "some advertiserName",
             campaignId = "some campaignId",

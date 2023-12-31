@@ -1,4 +1,4 @@
-package com.wscsports.android.blaze.sampleapp.ads
+package com.wscsports.android.blaze.sampleapp.ads.custom_native
 
 import android.content.Context
 import com.google.android.gms.ads.AdListener
