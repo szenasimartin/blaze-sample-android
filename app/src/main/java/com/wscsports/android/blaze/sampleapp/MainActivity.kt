@@ -1,5 +1,7 @@
 package com.wscsports.android.blaze.sampleapp
 
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.activity.viewModels
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        lockOrientation()
         installSplashScreen()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -40,6 +43,32 @@ class MainActivity : AppCompatActivity() {
             true
         } else {
             super.onKeyUp(keyCode, event)
+        }
+    }
+
+
+    /**
+     * Locks the screen orientation based on the device type.
+     *
+     * For tablet devices, the function allows user-controlled orientation.
+     * This means the orientation is not locked and can change based on how the user rotates the device.
+     *
+     * For non-tablet devices, the function locks the screen orientation to portrait mode.
+     * In portrait mode, the orientation is fixed and does not change with device rotation.
+     *
+     * Note: This is an example implementation for client apps. Clients may decide to use or modify
+     * this function based on their specific requirements. We recommend this approach for optimal
+     * user experience on different device types.
+     */
+    private fun lockOrientation() {
+        val isTabletDevice = ((resources.configuration.screenLayout
+                and Configuration.SCREENLAYOUT_SIZE_MASK)
+                >= Configuration.SCREENLAYOUT_SIZE_LARGE)
+
+        requestedOrientation = if (isTabletDevice) {
+            ActivityInfo.SCREEN_ORIENTATION_USER
+        } else {
+            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
     }
 

@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BlazeSDKAndroidSampleApp"
         tools:targetApi="31">
+
+        <!-- For a better orientation handling experience, especially for BlazeMomentsPlayerContainer component,
+        we recommend adding the android:configChanges="orientation|screenSize" to the activity declaration.
+        This helps in handling orientation changes more efficiently by preventing activity restarts and allowing
+        the activity to handle configuration changes itself. -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
