@@ -18,7 +18,8 @@ fun NativeCustomFormatAd?.toAdModel(): BlazeGoogleCustomNativeAdModel? = this?.r
         trackingPixels.add(
             BlazeTrackingPixel(
                 eventType = BlazeTrackingPixel.PixelAdsEvents.OPENED_AD,
-                url = trackingUrl
+                url = trackingUrl,
+                customUserAgent = "[MyCustomUserAgent]"
             )
         )
     }

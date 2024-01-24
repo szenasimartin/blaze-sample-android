@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import com.blaze.blazesdk.core.models.BlazeResult
 import com.blaze.blazesdk.features.moments.container.BlazeMomentsPlayerContainer
 import com.blaze.blazesdk.features.player.BlazePlayerInContainerDelegate
-import com.blaze.blazesdk.features.stories.models.ui.CtaTypeModel
+import com.blaze.blazesdk.features.stories.models.ui.BlazeLinkActionHandleType
 import com.blaze.blazesdk.features.widgets.labels.BlazeDataSourceType
 import com.blaze.blazesdk.features.widgets.labels.BlazeWidgetLabel
 import com.blaze.blazesdk.presets.BlazeMomentPresetThemes
@@ -83,20 +83,35 @@ class MomentsContainerFragment: Fragment(R.layout.fragment_container_moments) {
 
             override fun onTriggerCTA(containerId: String, actionType: String, actionParam: String): Boolean {
                 logd("onTriggerCTA - containerId => $containerId, actionType => $actionType, actionParam => $actionParam")
-                return when (CtaTypeModel.typeFromString(actionType)) {
-                    CtaTypeModel.DEEPLINK -> {
-                        true
-                    }
 
-                    CtaTypeModel.WEB -> {
+                return when (actionType) {
+
+                    "Deeplink" -> {
+                        //return true as if this was handled by App and not SDK
                         false
                     }
 
-                    null -> {
+                    "Web" -> {
+                        //return true as if this was not handled by App and should be handled by SDK
+                        true
+                    }
+
+                    else -> {
                         //Handle in case needed
                         false
                     }
                 }
+            }
+
+            override fun onTriggerPlayerBodyTextLink(
+                containerId: String,
+                actionParam: String
+            ): BlazeLinkActionHandleType {
+                // Choose the best suitable option to open the received `link` in the `actionParam` property.
+                // More info: https://dev.wsc-sports.com/docs/android-player-container#ontriggerplayerbodytextlink
+
+                // For example,
+                return BlazeLinkActionHandleType.DEEPLINK
             }
         }
 

@@ -30,7 +30,6 @@ import androidx.fragment.app.Fragment
 import com.blaze.blazesdk.core.models.BlazeResult
 import com.blaze.blazesdk.features.compose.StoriesWidgetsRow
 import com.blaze.blazesdk.features.compose.WidgetStoriesStateHandler
-import com.blaze.blazesdk.features.stories.models.ui.CtaTypeModel
 import com.blaze.blazesdk.features.widgets.labels.BlazeDataSourceType
 import com.blaze.blazesdk.features.widgets.labels.BlazeWidgetLabel
 import com.blaze.blazesdk.presets.BlazeStoriesPresetThemes
@@ -69,18 +68,19 @@ class RecentLeaguesFragment : Fragment() {
     private fun onTriggerCTA(widgetId: String, actionType: String, actionParam: String): Boolean {
         logd("onTriggerCTA - widgetId => $widgetId, actionType => $actionType, actionParam => $actionParam")
 
-        return when (CtaTypeModel.typeFromString(actionType)) {
-            CtaTypeModel.DEEPLINK -> {
-                //return true as if this was handled by App and not SDK
-                true
-            }
+        return when (actionType) {
 
-            CtaTypeModel.WEB -> {
-                //return true as if this was not handled by App and should be handled by SDK
+            "Deeplink" -> {
+                //return true as if this was handled by App and not SDK
                 false
             }
 
-            null -> {
+            "Web" -> {
+                //return true as if this was not handled by App and should be handled by SDK
+                true
+            }
+
+            else -> {
                 //Handle in case needed
                 false
             }
