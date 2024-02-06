@@ -6,17 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.blaze.blazesdk.core.models.BlazeResult
 import com.blaze.blazesdk.features.moments.container.BlazeMomentsPlayerContainer
-import com.blaze.blazesdk.features.player.BlazePlayerInContainerDelegate
-import com.blaze.blazesdk.features.stories.models.ui.BlazeLinkActionHandleType
 import com.blaze.blazesdk.features.widgets.labels.BlazeDataSourceType
 import com.blaze.blazesdk.features.widgets.labels.BlazeWidgetLabel
 import com.blaze.blazesdk.presets.BlazeMomentPresetThemes
 import com.wscsports.android.blaze.sampleapp.R
 import com.wscsports.android.blaze.sampleapp.VolumeViewModel
+import com.wscsports.android.blaze.sampleapp.core.Delegates
 import com.wscsports.android.blaze.sampleapp.databinding.FragmentContainerMomentsBinding
-import com.wscsports.android.blaze.sampleapp.logd
 
 class MomentsContainerFragment: Fragment(R.layout.fragment_container_moments) {
 
@@ -67,61 +64,13 @@ class MomentsContainerFragment: Fragment(R.layout.fragment_container_moments) {
         momentsPlayerTheme.buttons.exitButton.isVisible = false
         momentsPlayerTheme.playerSeekBar.isVisible = false
 
-        // Delegates implementation
-        val playerInContainerDelegate = object : BlazePlayerInContainerDelegate {
-            override fun onContainedPlayerDismissed(containerId: String) {
-                logd("onContainedPlayerDismissed - containerId => $containerId")
-            }
-
-            override fun onDataLoadCompleted(containerId: String, itemsCount: Int, result: BlazeResult<Unit>?) {
-                logd("onDataLoadCompleted - containerId => $containerId, itemsCount => $itemsCount, result => $result")
-            }
-
-            override fun onDataLoadStarted(containerId: String) {
-                logd("onDataLoadStarted - containerId => $containerId")
-            }
-
-            override fun onTriggerCTA(containerId: String, actionType: String, actionParam: String): Boolean {
-                logd("onTriggerCTA - containerId => $containerId, actionType => $actionType, actionParam => $actionParam")
-
-                return when (actionType) {
-
-                    "Deeplink" -> {
-                        //return true as if this was handled by App and not SDK
-                        false
-                    }
-
-                    "Web" -> {
-                        //return true as if this was not handled by App and should be handled by SDK
-                        true
-                    }
-
-                    else -> {
-                        //Handle in case needed
-                        false
-                    }
-                }
-            }
-
-            override fun onTriggerPlayerBodyTextLink(
-                containerId: String,
-                actionParam: String
-            ): BlazeLinkActionHandleType {
-                // Choose the best suitable option to open the received `link` in the `actionParam` property.
-                // More info: https://dev.wsc-sports.com/docs/android-player-container#ontriggerplayerbodytextlink
-
-                // For example,
-                return BlazeLinkActionHandleType.DEEPLINK
-            }
-        }
-
         // Initializing the BlazeMomentsPlayerContainer instance
         momentsPlayerContainer = BlazeMomentsPlayerContainer(
             dataSource = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("moments")),
             shouldPrepareContent = false,
-            containerId = "<UNIQUE_CONTAINER_ID",
+            containerId = "<UNIQUE_CONTAINER_ID>",
             momentsPlayerTheme = momentsPlayerTheme,
-            playerInContainerDelegate = playerInContainerDelegate
+            playerInContainerDelegate = Delegates.playerInContainerDelegate
         )
 
         // Starting to play

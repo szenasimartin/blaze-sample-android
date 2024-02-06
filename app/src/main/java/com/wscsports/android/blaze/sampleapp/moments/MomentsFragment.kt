@@ -5,15 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.blaze.blazesdk.core.analytics.models.BlazeAnalyticsEvent
-import com.blaze.blazesdk.core.models.BlazeResult
 import com.blaze.blazesdk.features.widgets.labels.BlazeDataSourceType
 import com.blaze.blazesdk.features.widgets.labels.BlazeWidgetLabel
-import com.blaze.blazesdk.features.widgets.shared.GlobalDelegates
 import com.blaze.blazesdk.presets.BlazeMomentPresetThemes
 import com.wscsports.android.blaze.sampleapp.R
+import com.wscsports.android.blaze.sampleapp.core.Delegates
 import com.wscsports.android.blaze.sampleapp.databinding.FragmentMomentsBinding
-import com.wscsports.android.blaze.sampleapp.logd
 
 class MomentsFragment : Fragment(R.layout.fragment_moments) {
 
@@ -29,21 +26,11 @@ class MomentsFragment : Fragment(R.layout.fragment_moments) {
         initListeners()
         initRowWidget()
         initGridWidget()
-        initGlobalDelegates()
     }
 
     override fun onResume() {
         super.onResume()
         binding?.momentsPullToRefresh?.isRefreshing = false
-    }
-
-    /**
-     * Global delegates
-     * */
-    private fun initGlobalDelegates() {
-        GlobalDelegates.onMomentsPlayerDidAppear = ::onMomentsPlayerDidAppear
-        GlobalDelegates.onMomentsPlayerDismissed = ::onMomentsPlayerDismissed
-        GlobalDelegates.onEventTriggered = ::onEventTriggered
     }
 
     /**
@@ -84,13 +71,7 @@ class MomentsFragment : Fragment(R.layout.fragment_moments) {
             blazeMomentTheme = momentsRowPreset,
             dataSource = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("moments")),
             widgetId = "moments-row",
-            onItemClicked = { item ->
-                logd("onItemClicked - item.id => ${item.id}")
-            },
-            onWidgetDataLoadStarted = ::onWidgetDataLoadStarted,
-            onWidgetDataLoadCompleted = ::onWidgetDataLoadCompleted,
-            onWidgetPlayerDismissed = ::onWidgetPlayerDismissed,
-            onTriggerCTA = ::onTriggerCTA
+            widgetDelegate = Delegates.widgetDelegate
         )
     }
 
@@ -115,67 +96,8 @@ class MomentsFragment : Fragment(R.layout.fragment_moments) {
             blazeMomentTheme = momentsGridPreset,
             dataSource = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("moments")),
             widgetId = "moments-grid",
-            onItemClicked = { item ->
-                logd("onItemClicked - item.id => ${item.id}")
-            },
-            onWidgetDataLoadStarted = ::onWidgetDataLoadStarted,
-            onWidgetDataLoadCompleted = ::onWidgetDataLoadCompleted,
-            onWidgetPlayerDismissed = ::onWidgetPlayerDismissed,
-            onTriggerCTA = ::onTriggerCTA
+            widgetDelegate = Delegates.widgetDelegate
         )
-    }
-
-
-    private fun onWidgetDataLoadStarted(widgetId: String) {
-        binding?.momentsPullToRefresh?.isRefreshing = true
-        logd("onWidgetDataLoadStarted - widgetId => $widgetId")
-    }
-
-    private fun onWidgetDataLoadCompleted(
-        widgetId: String,
-        itemsCount: Int,
-        error: BlazeResult<Any>?
-    ) {
-        logd("onWidgetDataLoadCompleted - widgetId => $widgetId, itemsCount => $itemsCount, error => $error")
-        binding?.momentsPullToRefresh?.isRefreshing = false
-    }
-
-    private fun onWidgetPlayerDismissed(widgetId: String) {
-        logd("onWidgetPlayerDismissed - widgetId => $widgetId")
-    }
-
-    private fun onTriggerCTA(widgetId: String, actionType: String, actionParam: String): Boolean {
-        logd("onTriggerCTA - widgetId => $widgetId, actionType => $actionType, actionParam => $actionParam")
-
-        return when (actionType) {
-
-            "Deeplink" -> {
-                //return true as if this was handled by App and not SDK
-                false
-            }
-
-            "Web" -> {
-                //return true as if this was not handled by App and should be handled by SDK
-                true
-            }
-
-            else -> {
-                //Handle in case needed
-                false
-            }
-        }
-    }
-
-    private fun onEventTriggered(eventData: BlazeAnalyticsEvent) {
-        logd("onEventTriggered - eventType => ${eventData.event_action.value}, eventData => $eventData")
-    }
-
-    private fun onMomentsPlayerDidAppear() {
-        logd("onMomentsPlayerDidAppear")
-    }
-
-    private fun onMomentsPlayerDismissed() {
-        logd("onMomentsPlayerDismissed")
     }
 
 }

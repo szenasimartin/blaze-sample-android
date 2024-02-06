@@ -34,6 +34,7 @@ import com.blaze.blazesdk.features.widgets.labels.BlazeDataSourceType
 import com.blaze.blazesdk.features.widgets.labels.BlazeWidgetLabel
 import com.blaze.blazesdk.presets.BlazeStoriesPresetThemes
 import com.wscsports.android.blaze.sampleapp.R
+import com.wscsports.android.blaze.sampleapp.core.Delegates
 import com.wscsports.android.blaze.sampleapp.logd
 
 class RecentLeaguesFragment : Fragment() {
@@ -106,12 +107,7 @@ class RecentLeaguesFragment : Fragment() {
             widgetId = widgetRowLiveStoriesId,
             blazeStoryTheme = BlazeStoriesPresetThemes.WIDGET_HORIZONTAL_RECTANGLE_SINGLE_ITEM,
             dataSourceType = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("live-stories")),
-            maxItemsFromAPI = null,
-            onItemClicked = { },
-            onWidgetDataLoadStarted = ::onWidgetDataLoadStarted,
-            onWidgetDataLoadCompleted = ::onWidgetDataLoadCompleted,
-            onWidgetPlayerDismissed = ::onWidgetPlayerDismissed,
-            onTriggerCTA = ::onTriggerCTA,
+            widgetDelegate = Delegates.widgetDelegate
         )
 
         val widgetRowTopStoriesId = "top-stories-widget-row-compose"
@@ -119,11 +115,7 @@ class RecentLeaguesFragment : Fragment() {
             widgetId = widgetRowTopStoriesId,
             blazeStoryTheme = BlazeStoriesPresetThemes.WIDGET_HORIZONTAL_RECTANGLE_SINGLE_ITEM,
             dataSourceType = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("top-stories")),
-            onItemClicked = { },
-            onWidgetDataLoadStarted = ::onWidgetDataLoadStarted,
-            onWidgetDataLoadCompleted = ::onWidgetDataLoadCompleted,
-            onWidgetPlayerDismissed = ::onWidgetPlayerDismissed,
-            onTriggerCTA = ::onTriggerCTA,
+            widgetDelegate = Delegates.widgetDelegate
         )
 
 
@@ -149,7 +141,7 @@ class RecentLeaguesFragment : Fragment() {
                     modifier = Modifier
                         .height(calculatedRowHeight.dp)
                         .fillMaxWidth(),
-                    widgetStoriesStateHandle = widgetRowLiveStoriesHandler
+                    widgetStoriesStateHandler = widgetRowLiveStoriesHandler
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -162,7 +154,7 @@ class RecentLeaguesFragment : Fragment() {
                     modifier = Modifier
                         .height(calculatedRowHeight.dp)
                         .fillMaxWidth(),
-                    widgetStoriesStateHandle = widgetRowTopStoriesHandler
+                    widgetStoriesStateHandler = widgetRowTopStoriesHandler
                 )
             }
         }
