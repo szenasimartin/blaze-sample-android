@@ -61,8 +61,12 @@ class MomentsContainerFragment: Fragment(R.layout.fragment_container_moments) {
         // Customizing player
         val momentsPlayerTheme = BlazeMomentPresetThemes.MOMENTS_PLAYER_THEME
         momentsPlayerTheme.buttons.muteButton.isVisible = false
-        momentsPlayerTheme.buttons.exitButton.isVisible = false
-        momentsPlayerTheme.playerSeekBar.isVisible = false
+
+        momentsPlayerTheme.playerSeekBar.playingStyle.cornerRadius = 0f
+        momentsPlayerTheme.playerSeekBar.pausedStyle.cornerRadius = 0f
+        momentsPlayerTheme.playerSeekBar.pausedStyle.isThumbVisible = false
+        momentsPlayerTheme.playerSeekBar.bottomMargin = 0
+        momentsPlayerTheme.playerSeekBar.horizontalMargin = 0
 
         // Initializing the BlazeMomentsPlayerContainer instance
         momentsPlayerContainer = BlazeMomentsPlayerContainer(
