@@ -71,7 +71,8 @@ class MomentsFragment : Fragment(R.layout.fragment_moments) {
             blazeMomentTheme = momentsRowPreset,
             dataSource = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("moments")),
             widgetId = "moments-row",
-            widgetDelegate = Delegates.widgetDelegate
+            widgetDelegate = Delegates.widgetDelegate,
+            shouldOrderWidgetByReadStatus = true
         )
     }
 
@@ -96,7 +97,8 @@ class MomentsFragment : Fragment(R.layout.fragment_moments) {
             blazeMomentTheme = momentsGridPreset,
             dataSource = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("moments")),
             widgetId = "moments-grid",
-            widgetDelegate = Delegates.widgetDelegate
+            widgetDelegate = Delegates.widgetDelegate,
+            shouldOrderWidgetByReadStatus = true
         )
     }
 

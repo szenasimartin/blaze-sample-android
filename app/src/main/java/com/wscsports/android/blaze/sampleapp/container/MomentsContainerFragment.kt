@@ -74,7 +74,8 @@ class MomentsContainerFragment: Fragment(R.layout.fragment_container_moments) {
             shouldPrepareContent = false,
             containerId = "<UNIQUE_CONTAINER_ID>",
             momentsPlayerTheme = momentsPlayerTheme,
-            playerInContainerDelegate = Delegates.playerInContainerDelegate
+            playerInContainerDelegate = Delegates.playerInContainerDelegate,
+            shouldOrderMomentsByReadStatus = true
         )
 
         // Starting to play

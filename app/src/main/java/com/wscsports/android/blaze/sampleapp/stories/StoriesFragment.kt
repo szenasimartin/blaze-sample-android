@@ -84,7 +84,8 @@ class StoriesFragment : Fragment(R.layout.fragment_stories) {
             blazeStoryTheme = storiesRowPreset,
             dataSource = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("live-stories")),
             widgetId = "live-stories-row",
-            widgetDelegate = Delegates.widgetDelegate
+            widgetDelegate = Delegates.widgetDelegate,
+            shouldOrderWidgetByReadStatus = true
         )
     }
 
@@ -111,7 +112,8 @@ class StoriesFragment : Fragment(R.layout.fragment_stories) {
             blazeStoryTheme = storiesGridPreset,
             dataSource = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("top-stories")),
             widgetId = "top-stories-grid",
-            widgetDelegate = Delegates.widgetDelegate
+            widgetDelegate = Delegates.widgetDelegate,
+            shouldOrderWidgetByReadStatus = true
         )
     }
 
