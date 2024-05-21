@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.blaze.blazesdk.features.moments.container.BlazeMomentsPlayerContainer
+import com.blaze.blazesdk.features.widgets.labels.BlazeDataSourceType
+import com.blaze.blazesdk.features.widgets.labels.BlazeWidgetLabel
 import com.wscsports.android.blaze.sampleapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUi()
+        prepareMomentsContainer()
     }
 
     private fun initUi() {
@@ -34,6 +38,13 @@ class MainActivity : AppCompatActivity() {
                 mainActivityBottomNavigationView.setupWithNavController(it)
             }
         }
+    }
+
+    private fun prepareMomentsContainer() {
+        BlazeMomentsPlayerContainer.prepareMoments(
+            containerId = "blaze-moments-container-unique-id",
+            dataSource = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("moments"))
+        )
     }
 
     // Observing user increasing/decreasing volume, and updating the SDK
