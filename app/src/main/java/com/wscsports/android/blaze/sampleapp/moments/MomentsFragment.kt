@@ -39,19 +39,30 @@ class MomentsFragment : Fragment(R.layout.fragment_moments) {
     private fun initListeners() {
         binding?.apply {
             momentsPullToRefresh.setOnRefreshListener {
-                updateLabels()
+                updateDataSource()
                 momentsPullToRefresh.isRefreshing = false
             }
         }
     }
 
     /**
-     * Used to showcase options to change labels and or refresh data for current labelExpression.
+     * Used to showcase options to change data source type and or refresh data for current data source.
      */
-    private fun updateLabels() {
+    private fun updateDataSource() {
         binding?.apply {
-//        binding.momentsRowWidget.updateLabel(BlazeWidgetLabel.singleLabel("moments"))
-//        binding.momentsGridWidget.updateLabel(BlazeWidgetLabel.singleLabel("moments"))
+
+            momentsRowWidget.updateDataSource(
+                dataSourceType = BlazeDataSourceType.Labels(
+                    BlazeWidgetLabel.singleLabel("moments")
+                )
+            )
+
+            momentsGridWidget.updateDataSource(
+                dataSourceType = BlazeDataSourceType.Labels(
+                    BlazeWidgetLabel.singleLabel("moments")
+                )
+            )
+
             momentsRowWidget.reloadData()
             momentsGridWidget.reloadData()
         }

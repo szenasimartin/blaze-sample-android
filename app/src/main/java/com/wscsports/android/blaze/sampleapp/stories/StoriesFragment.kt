@@ -40,19 +40,30 @@ class StoriesFragment : Fragment(R.layout.fragment_stories) {
     private fun initListeners() {
         binding?.apply {
             storiesPullToRefresh.setOnRefreshListener {
-                updateLabels()
+                updateDataSource()
                 storiesPullToRefresh.isRefreshing = false
             }
         }
     }
 
     /**
-     * Used to showcase options to change labels and or refresh data for current labelExpression.
+     * Used to showcase options to change data source type and or refresh data for current data source.
      */
-    private fun updateLabels() {
+    private fun updateDataSource() {
         binding?.apply {
-//        binding.storyRowWidget.updateLabel(BlazeWidgetLabel.singleLabel("live-stories"))
-//        binding.storyGridWidget.updateLabel(BlazeWidgetLabel.singleLabel("top-stories"))
+
+            storyRowWidget.updateDataSource(
+                dataSourceType = BlazeDataSourceType.Labels(
+                    BlazeWidgetLabel.singleLabel("live-stories")
+                )
+            )
+
+            storyGridWidget.updateDataSource(
+                dataSourceType = BlazeDataSourceType.Labels(
+                    BlazeWidgetLabel.singleLabel("top-stories")
+                )
+            )
+
             storyRowWidget.reloadData()
             storyGridWidget.reloadData()
         }
