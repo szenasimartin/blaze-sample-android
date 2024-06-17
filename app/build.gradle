@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
-def blazeSDK = '0.106.0'
+def blazeSDK = '0.107.0'
 
 android {
     namespace 'com.wscsports.android.blaze.sampleapp'

@@ -80,9 +80,6 @@ class StoriesFragment : Fragment(R.layout.fragment_stories) {
         //You can modify player buttons experience by setting buttons scaleType in playerTheme
         //storiesRowPreset.playerTheme.buttons.exitButton.scaleType = BlazeScaleType.FIT_XY
 
-        //You can modify the position of the CTA button.
-        //storiesRowPreset.playerTheme.cta.layoutPositioning = PlayerCtaPositioning.CTA_NEXT_TO_SHARE
-
         // You can modify the format of the last update text.
         //storiesRowPreset.playerTheme.lastUpdate.textCase = PlayerTextCase.UPPERCASE
 
