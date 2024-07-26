@@ -4,40 +4,60 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.blaze.blazesdk.core.models.BlazeResult
-import com.blaze.blazesdk.features.compose.StoriesWidgetsRow
-import com.blaze.blazesdk.features.compose.WidgetStoriesStateHandler
+import com.blaze.blazesdk.features.compose.MomentsWidgetsGrid
+import com.blaze.blazesdk.features.compose.WidgetMomentsStateHandler
 import com.blaze.blazesdk.features.widgets.labels.BlazeDataSourceType
 import com.blaze.blazesdk.features.widgets.labels.BlazeWidgetLabel
-import com.blaze.blazesdk.presets.BlazeStoriesPresetThemes
-import com.wscsports.android.blaze.sampleapp.R
+import com.blaze.blazesdk.presets.BlazeMomentPresetThemes
 import com.wscsports.android.blaze.sampleapp.core.Delegates
 import com.wscsports.android.blaze.sampleapp.logd
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class RecentLeaguesFragment : Fragment() {
+
+    private val viewModelViewState = MutableStateFlow(ViewState(listOf(Items.Moments("1"))))
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        lifecycleScope.launch {
+            CoroutineScope(Dispatchers.IO).launch {
+                delay(2000)
+                viewModelViewState.update { currentState ->
+                    val newList: MutableList<Items> = currentState.items.toMutableList()
+                    newList.add(0, Items.Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas malesuada auctor eros in iaculis. Quisque sit amet hendrerit risus. Nulla ultrices nisl quis orci blandit, in sodales massa co"))
+                    newList.add(0, Items.Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas malesuada auctor eros in iaculis. Quisque sit amet hendrerit risus. Nulla ultrices nisl quis orci blandit, in sodales massa co"))
+                    newList.add(0, Items.Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas malesuada auctor eros in iaculis. Quisque sit amet hendrerit risus. Nulla ultrices nisl quis orci blandit, in sodales massa co"))
+                    newList.add(0, Items.Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas malesuada auctor eros in iaculis. Quisque sit amet hendrerit risus. Nulla ultrices nisl quis orci blandit, in sodales massa co"))
+                    currentState.copy(items = newList)
+                }
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,69 +116,35 @@ class RecentLeaguesFragment : Fragment() {
 
     @Composable
     fun ComposeFragmentLayout() {
+        val viewState by viewModelViewState.collectAsStateWithLifecycle()
+        LazyColumn {
+            items(viewState.items) { item ->
+                when (item) {
+                    is Items.Moments -> MomentsWidgetsGrid(
+                        modifier = Modifier,
+                        widgetMomentsStateHandler = WidgetMomentsStateHandler(
+                            widgetId = item.id,
+                            blazeMomentTheme = BlazeMomentPresetThemes.GRID_WIDGET_RECTANGLE_3_COL.apply {
+                                widgetLayout.maxDisplayItemsCount = 9
+                            },
+                            dataSourceType = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("th_home_moments")),
+                            widgetDelegate = Delegates.widgetDelegate,
+                        ),
+                    )
 
-        val screenWidth = LocalConfiguration.current.screenWidthDp // Device screen width
-        val rowHeight = screenWidth * (9f / 16f) // Calculating height (using 16:9 ratio).
-        val horizontalMargin = 8 // In dp
-        val calculatedRowHeight = rowHeight - horizontalMargin
-
-        val widgetRowLiveStoriesId = "live-stories-widget-row-compose"
-        val widgetRowLiveStoriesHandler = WidgetStoriesStateHandler(
-            widgetId = widgetRowLiveStoriesId,
-            blazeStoryTheme = BlazeStoriesPresetThemes.WIDGET_HORIZONTAL_RECTANGLE_SINGLE_ITEM,
-            dataSourceType = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("live-stories")),
-            widgetDelegate = Delegates.widgetDelegate
-        )
-
-        val widgetRowTopStoriesId = "top-stories-widget-row-compose"
-        val widgetRowTopStoriesHandler = WidgetStoriesStateHandler(
-            widgetId = widgetRowTopStoriesId,
-            blazeStoryTheme = BlazeStoriesPresetThemes.WIDGET_HORIZONTAL_RECTANGLE_SINGLE_ITEM,
-            dataSourceType = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("top-stories")),
-            widgetDelegate = Delegates.widgetDelegate
-        )
-
-
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.White)
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState()),
-
-                ) {
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                BlazeTitle(
-                    title = resources.getString(R.string.recent_stories)
-                )
-
-                StoriesWidgetsRow(
-                    modifier = Modifier
-                        .height(calculatedRowHeight.dp)
-                        .fillMaxWidth(),
-                    widgetStoriesStateHandler = widgetRowLiveStoriesHandler
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                BlazeTitle(
-                    title = resources.getString(R.string.top_stories)
-                )
-
-                StoriesWidgetsRow(
-                    modifier = Modifier
-                        .height(calculatedRowHeight.dp)
-                        .fillMaxWidth(),
-                    widgetStoriesStateHandler = widgetRowTopStoriesHandler
-                )
+                    is Items.Text -> Text(text = item.text)
+                }
             }
         }
+
     }
+}
+
+data class ViewState(val items: List<Items>)
+
+sealed class Items {
+    data class Text(val text: String) : Items()
+    data class Moments(val id: String) : Items()
 }
 
 @Composable

@@ -27,6 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".viewpager.ViewPagerActivity"/>
 
         <!-- IMPORTANT - the following app id is a TEST id. You should use your own app id! -->
         <meta-data
