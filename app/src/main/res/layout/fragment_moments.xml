@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.blaze.blazesdk.features.moments.widgets.row.MomentsWidgetsRowList
+        <com.blaze.blazesdk.features.moments.widgets.row.BlazeMomentsWidgetRowView
             android:id="@+id/momentsRowWidget"
             android:layout_width="0dp"
             android:layout_height="140dp"
@@ -47,7 +47,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/momentsRowWidget" />
 
-        <com.blaze.blazesdk.features.moments.widgets.grid.MomentsWidgetsGridList
+        <com.blaze.blazesdk.features.moments.widgets.grid.BlazeMomentsWidgetGridView
             android:id="@+id/momentsGridWidget"
             android:layout_width="0dp"
             android:layout_height="0dp"

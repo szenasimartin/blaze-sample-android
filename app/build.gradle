@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
-def blazeSDK = '0.110.2'
+def blazeSDK = '1.0.0'
 
 android {
     namespace 'com.wscsports.android.blaze.sampleapp'
@@ -83,6 +83,8 @@ dependencies {
     implementation 'com.google.ads.interactivemedia.v3:interactivemedia:3.32.0'
 
     implementation group: "com.blaze", name: "blazesdk", version: "${blazeSDK}"
+    implementation group: "com.blaze", name: "gam", version: "${blazeSDK}"
+    implementation group: "com.blaze", name: "ima", version: "${blazeSDK}"
 
     implementation "androidx.core:core-splashscreen:1.0.1"
 

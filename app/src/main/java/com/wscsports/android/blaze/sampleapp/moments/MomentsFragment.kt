@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.blaze.blazesdk.features.widgets.labels.BlazeDataSourceType
-import com.blaze.blazesdk.features.widgets.labels.BlazeWidgetLabel
-import com.blaze.blazesdk.presets.BlazeMomentPresetThemes
+import com.blaze.blazesdk.data_source.BlazeDataSourceType
+import com.blaze.blazesdk.data_source.BlazeWidgetLabel
+import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerFooterGradientStyle
+import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerStyle
+import com.blaze.blazesdk.style.widgets.BlazeWidgetLayout
 import com.wscsports.android.blaze.sampleapp.R
 import com.wscsports.android.blaze.sampleapp.core.Delegates
 import com.wscsports.android.blaze.sampleapp.databinding.FragmentMomentsBinding
@@ -70,16 +72,21 @@ class MomentsFragment : Fragment(R.layout.fragment_moments) {
 
 
     private fun initRowWidget() {
-        // Using default Preset
-        val momentsRowPreset = BlazeMomentPresetThemes.ROW_WIDGET_RECTANGLE
-        //You can modify onboarding experience by setting firstTimeSlide in playerTheme
-        //momentsRowPreset.playerTheme.firstTimeSlide.mainTitle.text ="Moments First Time Slide Title"
+        // Using rectangles Preset
+        val momentsWidgetRowPreset = BlazeWidgetLayout.Presets.MomentsWidget.Row.verticalRectangles
 
-        //You can modify player buttons experience by setting buttons scaleType in playerTheme
-        // momentsRowPreset.playerTheme.buttons.exitButton.scaleType = BlazeScaleType.FIT_XY
+        // Using default player Preset
+        val momentsPlayerPreset = BlazeMomentsPlayerStyle.base()
+
+        //You can modify onboarding experience by setting firstTimeSlide in player style
+        // momentsPlayerPreset.firstTimeSlide.mainTitle.text ="Moments First Time Slide Title"
+
+        //You can modify player buttons experience by setting buttons scaleType in player style
+        // momentsPlayerPreset.buttons.exit.scaleType = ImageView.ScaleType.FIT_XY
 
         binding?.momentsRowWidget?.initWidget(
-            blazeMomentTheme = momentsRowPreset,
+            widgetLayout = momentsWidgetRowPreset,
+            playerStyle = momentsPlayerPreset,
             dataSource = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("moments")),
             widgetId = "moments-row",
             widgetDelegate = Delegates.widgetDelegate,
@@ -88,24 +95,28 @@ class MomentsFragment : Fragment(R.layout.fragment_moments) {
     }
 
     private fun initGridWidget() {
-        // Using default Preset
-        val momentsGridPreset = BlazeMomentPresetThemes.ROW_WIDGET_RECTANGLE
+        // Using 2 columns  Preset
+        val momentsWidgetGridPreset = BlazeWidgetLayout.Presets.MomentsWidget.Grid.twoColumnsVerticalRectangles
 
-        //You can modify onboarding experience by setting firstTimeSlide in playerTheme
-        //momentsGridPreset.playerTheme.firstTimeSlide.mainTitle.text ="Moments First Time Slide Title"
+        // Using default player Preset
+        val momentsPlayerPreset = BlazeMomentsPlayerStyle.base()
 
-        //You can modify player buttons experience by setting buttons scaleType in playerTheme
-        // momentsGridPreset.playerTheme.buttons.exitButton.scaleType = BlazeScaleType.FIT_XY
+        // You can modify onboarding experience by setting firstTimeSlide in player style
+        // momentsPlayerPreset.firstTimeSlide.mainTitle.text ="Moments First Time Slide Title"
 
-        //You can modify the end positioning of the bottom gradient.
-        //momentsGridPreset.playerTheme.playerFooterGradient.endPositioning = PlayerFooterGradientPositioning.BOTTOM_TO_CONTAINER
+        // You can modify player buttons experience by setting buttons scaleType in player style
+         // momentsPlayerPreset.buttons.exit.scaleType = ImageView.ScaleType.FIT_XY
+
+        // You can modify the end positioning of the bottom gradient.
+        momentsPlayerPreset.footerGradient.endPositioning = BlazeMomentsPlayerFooterGradientStyle.BlazeEndPositioning.BOTTOM_TO_CONTAINER
 
         // We can modify the given presets. i.e.,
         // Limit the amount of items shown on the widget level
-        momentsGridPreset.widgetLayout.maxDisplayItemsCount = 4
+        momentsWidgetGridPreset.maxDisplayItemsCount = 4
 
         binding?.momentsGridWidget?.initWidget(
-            blazeMomentTheme = momentsGridPreset,
+            widgetLayout = momentsWidgetGridPreset,
+            playerStyle = momentsPlayerPreset,
             dataSource = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("moments")),
             widgetId = "moments-grid",
             widgetDelegate = Delegates.widgetDelegate,
