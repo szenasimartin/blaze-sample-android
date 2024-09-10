@@ -14,7 +14,7 @@ object IMADelegate : BlazeIMADelegate {
         return emptyMap()
     }
 
-    override fun customIMASettings(): ImaSdkSettings? {
+    override fun customIMASettings(): ImaSdkSettings {
         // Optional implementation. You can use this to customize ImaSdkSettings.
         return ImaSdkFactory.getInstance().createImaSdkSettings().apply {
 

@@ -5,7 +5,8 @@ import com.blaze.blazesdk.shared.BlazeSDK
 import com.blaze.blazesdk.prefetch.models.BlazeCachingLevel
 import com.blaze.gam.BlazeGAM
 import com.blaze.ima.BlazeIMA
-import com.wscsports.android.blaze.sampleapp.ads.gam.GAMDelegate
+import com.wscsports.android.blaze.sampleapp.ads.gam.BannerAdsDelegate
+import com.wscsports.android.blaze.sampleapp.ads.gam.CustomNativeAdsDelegate
 import com.wscsports.android.blaze.sampleapp.ads.ima.IMADelegate
 import com.wscsports.android.blaze.sampleapp.core.Delegates
 
@@ -26,19 +27,25 @@ class Application : Application() {
             playerEntryPointDelegate = Delegates.playerEntryPointDelegate,
             completionBlock = {
                 logd("BlazeSDK.init completionBlock")
-
-                BlazeIMA.enableAds(
-                    delegate = IMADelegate
-                )
-
-                BlazeGAM.enableCustomNativeAds(
-                    context = applicationContext,
-                    delegate = GAMDelegate
-                )
+                enableAds()
             },
             errorBlock = { error ->
                 logd("BlazeSDK.init errorBlock -> , Init Error = $error")
             }
+        )
+    }
+
+    private fun enableAds() {
+        BlazeIMA.enableAds(
+            delegate = IMADelegate
+        )
+        BlazeGAM.enableCustomNativeAds(
+            context = applicationContext,
+            delegate = CustomNativeAdsDelegate
+        )
+        BlazeGAM.enableBannerAds(
+            context = applicationContext,
+            delegate = BannerAdsDelegate
         )
     }
 
