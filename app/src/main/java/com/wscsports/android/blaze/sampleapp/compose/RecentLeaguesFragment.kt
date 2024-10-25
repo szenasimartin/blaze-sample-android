@@ -29,9 +29,13 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import com.blaze.blazesdk.data_source.BlazeDataSourceType
 import com.blaze.blazesdk.data_source.BlazeWidgetLabel
+import com.blaze.blazesdk.delegates.models.BlazePlayerType
+import com.blaze.blazesdk.features.moments.widgets.compose.BlazeComposeWidgetMomentsStateHandler
+import com.blaze.blazesdk.features.moments.widgets.compose.grid.BlazeComposeMomentsWidgetGridView
 import com.blaze.blazesdk.features.stories.widgets.compose.BlazeComposeWidgetStoriesStateHandler
 import com.blaze.blazesdk.features.stories.widgets.compose.row.BlazeComposeStoriesWidgetRowView
 import com.blaze.blazesdk.shared.results.BlazeResult
+import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerStyle
 import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerStyle
 import com.blaze.blazesdk.style.widgets.BlazeWidgetLayout
 import com.wscsports.android.blaze.sampleapp.R
@@ -103,7 +107,7 @@ class RecentLeaguesFragment : Fragment() {
         val horizontalMargin = 8 // In dp
         val calculatedRowHeight = rowHeight - horizontalMargin
 
-        val widgetRowLiveStoriesId = "live-stories-widget-row-compose"
+        /*val widgetRowLiveStoriesId = "live-stories-widget-row-compose"
         val widgetRowLiveStoriesHandler = BlazeComposeWidgetStoriesStateHandler(
             widgetId = widgetRowLiveStoriesId,
             widgetLayout = BlazeWidgetLayout.Presets.StoriesWidget.Row.singleItemHorizontalRectangle,
@@ -118,6 +122,15 @@ class RecentLeaguesFragment : Fragment() {
             widgetLayout = BlazeWidgetLayout.Presets.StoriesWidget.Row.singleItemHorizontalRectangle,
             playerStyle = BlazeStoryPlayerStyle.base(),
             dataSourceType = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("top-stories")),
+            widgetDelegate = Delegates.widgetDelegate
+        )*/
+
+        val widgetRowTopMomentsId = "home-moments-row"
+        val widgetRowTopMomentsHandler = BlazeComposeWidgetMomentsStateHandler(
+            widgetId = widgetRowTopMomentsId,
+            widgetLayout = BlazeWidgetLayout.Presets.MomentsWidget.Row.horizontalRectangles,
+            playerStyle = BlazeMomentsPlayerStyle.base(),
+            dataSourceType = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("moments")),
             widgetDelegate = Delegates.widgetDelegate
         )
 
@@ -136,7 +149,12 @@ class RecentLeaguesFragment : Fragment() {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                BlazeTitle(
+                BlazeComposeMomentsWidgetGridView(
+                    modifier = Modifier.fillMaxWidth(),
+                    widgetMomentsStateHandler = widgetRowTopMomentsHandler,
+                )
+
+                /*BlazeTitle(
                     title = resources.getString(R.string.recent_stories)
                 )
 
@@ -145,9 +163,9 @@ class RecentLeaguesFragment : Fragment() {
                         .height(calculatedRowHeight.dp)
                         .fillMaxWidth(),
                     widgetStoriesStateHandler = widgetRowLiveStoriesHandler
-                )
+                )*/
 
-                Spacer(modifier = Modifier.height(16.dp))
+                /*Spacer(modifier = Modifier.height(16.dp))
 
                 BlazeTitle(
                     title = resources.getString(R.string.top_stories)
@@ -158,7 +176,7 @@ class RecentLeaguesFragment : Fragment() {
                         .height(calculatedRowHeight.dp)
                         .fillMaxWidth(),
                     widgetStoriesStateHandler = widgetRowTopStoriesHandler
-                )
+                )*/
             }
         }
     }
