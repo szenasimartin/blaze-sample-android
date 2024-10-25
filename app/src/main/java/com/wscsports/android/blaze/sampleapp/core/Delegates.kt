@@ -1,14 +1,15 @@
 package com.wscsports.android.blaze.sampleapp.core
 
 import android.util.Log
-import com.blaze.blazesdk.core.analytics.models.BlazeAnalyticsEvent
-import com.blaze.blazesdk.core.delegates.BlazePlayerEntryPointDelegate
-import com.blaze.blazesdk.core.delegates.BlazePlayerType
-import com.blaze.blazesdk.core.delegates.BlazeWidgetDelegate
-import com.blaze.blazesdk.core.models.BlazeResult
-import com.blaze.blazesdk.features.player.BlazePlayerInContainerDelegate
-import com.blaze.blazesdk.features.stories.models.ui.BlazeLinkActionHandleType
-import com.blaze.blazesdk.features.widgets.shared.BlazeGlobalDelegate
+import com.blaze.blazesdk.analytics.models.BlazeAnalyticsEvent
+import com.blaze.blazesdk.delegates.BlazePlayerEntryPointDelegate
+import com.blaze.blazesdk.delegates.BlazePlayerInContainerDelegate
+import com.blaze.blazesdk.delegates.BlazeSDKDelegate
+import com.blaze.blazesdk.delegates.BlazeWidgetDelegate
+import com.blaze.blazesdk.delegates.models.BlazePlayerType
+import com.blaze.blazesdk.features.shared.models.ui_shared.BlazeLinkActionHandleType
+import com.blaze.blazesdk.shared.results.BlazeResult
+
 
 /**
  * [Delegates] shows you how you can override and react to events throughout the SDK.
@@ -26,7 +27,7 @@ object Delegates {
     private const val TAG = "BlazeSampleAppDelegatesTAG"
 
     // Global Delegates sample implementation
-    val globalDelegate = object : BlazeGlobalDelegate {
+    val globalDelegate = object : BlazeSDKDelegate {
 
         override fun onErrorThrown(error: BlazeResult.Error) {
             Log.d(TAG, "onErrorThrown - $error")

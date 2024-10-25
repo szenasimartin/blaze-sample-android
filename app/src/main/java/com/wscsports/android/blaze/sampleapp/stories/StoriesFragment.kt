@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.blaze.blazesdk.features.ads.custom_native.models.BlazeStoriesAdsConfigType
-import com.blaze.blazesdk.features.widgets.labels.BlazeDataSourceType
-import com.blaze.blazesdk.features.widgets.labels.BlazeWidgetLabel
-import com.blaze.blazesdk.presets.BlazeStoriesPresetThemes
+import com.blaze.blazesdk.ads.custom_native.models.BlazeStoriesAdsConfigType
+import com.blaze.blazesdk.data_source.BlazeDataSourceType
+import com.blaze.blazesdk.data_source.BlazeWidgetLabel
+import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerStyle
+import com.blaze.blazesdk.style.widgets.BlazeWidgetLayout
 import com.wscsports.android.blaze.sampleapp.R
 import com.wscsports.android.blaze.sampleapp.core.Delegates
 import com.wscsports.android.blaze.sampleapp.databinding.FragmentStoriesBinding
@@ -72,16 +73,19 @@ class StoriesFragment : Fragment(R.layout.fragment_stories) {
 
     private fun initRowWidget() {
         // Using default Preset
-        val storiesRowPreset = BlazeStoriesPresetThemes.ROW_WIDGET_CIRCLE
+        val storiesWidgetRowPreset = BlazeWidgetLayout.Presets.StoriesWidget.Row.circles
 
-        //You can modify onboarding experience by setting firstTimeSlide in playerTheme
-        //storiesRowPreset.playerTheme.firstTimeSlide.mainTitle.text ="Moments First Time Slide Title"
+        // Using default player Preset
+        val storiesPlayerPreset = BlazeStoryPlayerStyle.base()
 
-        //You can modify player buttons experience by setting buttons scaleType in playerTheme
-        //storiesRowPreset.playerTheme.buttons.exitButton.scaleType = BlazeScaleType.FIT_XY
+        // You can modify onboarding experience by setting firstTimeSlide in player style
+//         storiesPlayerPreset.firstTimeSlide.mainTitle.text ="Stories First Time Slide Title"
+
+        // You can modify player buttons experience by setting buttons scaleType in player style
+//         storiesPlayerPreset.buttons.exit.scaleType = ImageView.ScaleType.FIT_XY
 
         // You can modify the format of the last update text.
-        //storiesRowPreset.playerTheme.lastUpdate.textCase = PlayerTextCase.UPPERCASE
+//         storiesPlayerPreset.lastUpdate.textCase = BlazeTextCase.UPPERCASE
 
         // Example of customizing ads configuration
         binding?.storyRowWidget?.updateAdsConfigType(
@@ -89,7 +93,8 @@ class StoriesFragment : Fragment(R.layout.fragment_stories) {
         )
 
         binding?.storyRowWidget?.initWidget(
-            blazeStoryTheme = storiesRowPreset,
+            widgetLayout = storiesWidgetRowPreset,
+            playerStyle = storiesPlayerPreset,
             dataSource = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("live-stories")),
             widgetId = "live-stories-row",
             widgetDelegate = Delegates.widgetDelegate,
@@ -99,17 +104,20 @@ class StoriesFragment : Fragment(R.layout.fragment_stories) {
 
     private fun initGridWidget() {
         // Using default Preset
-        val storiesGridPreset = BlazeStoriesPresetThemes.GRID_WIDGET_RECTANGLE_2_COL
+        val storiesWidgetGridPreset = BlazeWidgetLayout.Presets.StoriesWidget.Grid.twoColumnsVerticalRectangles
+
+        // Using default player Preset
+        val storiesPlayerPreset = BlazeStoryPlayerStyle.base()
 
         //You can modify onboarding experience by setting firstTimeSlide in playerTheme
-        //storiesGridPreset.playerTheme.firstTimeSlide.mainTitle.text ="Moments First Time Slide Title"
+//        storiesPlayerPreset.firstTimeSlide.mainTitle.text ="Stories First Time Slide Title"
 
         //You can modify player buttons experience by setting buttons scaleType in playerTheme
-        //storiesGridPreset.playerTheme.buttons.exitButton.scaleType = BlazeScaleType.FIT_XY
+//        storiesPlayerPreset.buttons.exit.scaleType = ImageView.ScaleType.FIT_XY
 
         // We can modify the given presets. i.e.,
         // Limit the amount of items shown on the widget level
-        storiesGridPreset.widgetLayout.maxDisplayItemsCount = 4
+//        storiesWidgetGridPreset.maxDisplayItemsCount = 4
 
         // Example of customizing ads configuration
         binding?.storyRowWidget?.updateAdsConfigType(
@@ -117,7 +125,8 @@ class StoriesFragment : Fragment(R.layout.fragment_stories) {
         )
 
         binding?.storyGridWidget?.initWidget(
-            blazeStoryTheme = storiesGridPreset,
+            widgetLayout = storiesWidgetGridPreset,
+            playerStyle = storiesPlayerPreset,
             dataSource = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("top-stories")),
             widgetId = "top-stories-grid",
             widgetDelegate = Delegates.widgetDelegate,

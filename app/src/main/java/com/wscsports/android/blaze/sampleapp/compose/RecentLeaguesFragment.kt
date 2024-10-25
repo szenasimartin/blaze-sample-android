@@ -27,12 +27,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
-import com.blaze.blazesdk.core.models.BlazeResult
-import com.blaze.blazesdk.features.compose.StoriesWidgetsRow
-import com.blaze.blazesdk.features.compose.WidgetStoriesStateHandler
-import com.blaze.blazesdk.features.widgets.labels.BlazeDataSourceType
-import com.blaze.blazesdk.features.widgets.labels.BlazeWidgetLabel
-import com.blaze.blazesdk.presets.BlazeStoriesPresetThemes
+import com.blaze.blazesdk.data_source.BlazeDataSourceType
+import com.blaze.blazesdk.data_source.BlazeWidgetLabel
+import com.blaze.blazesdk.features.stories.widgets.compose.BlazeComposeWidgetStoriesStateHandler
+import com.blaze.blazesdk.features.stories.widgets.compose.row.BlazeComposeStoriesWidgetRowView
+import com.blaze.blazesdk.shared.results.BlazeResult
+import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerStyle
+import com.blaze.blazesdk.style.widgets.BlazeWidgetLayout
 import com.wscsports.android.blaze.sampleapp.R
 import com.wscsports.android.blaze.sampleapp.core.Delegates
 import com.wscsports.android.blaze.sampleapp.logd
@@ -103,17 +104,19 @@ class RecentLeaguesFragment : Fragment() {
         val calculatedRowHeight = rowHeight - horizontalMargin
 
         val widgetRowLiveStoriesId = "live-stories-widget-row-compose"
-        val widgetRowLiveStoriesHandler = WidgetStoriesStateHandler(
+        val widgetRowLiveStoriesHandler = BlazeComposeWidgetStoriesStateHandler(
             widgetId = widgetRowLiveStoriesId,
-            blazeStoryTheme = BlazeStoriesPresetThemes.WIDGET_HORIZONTAL_RECTANGLE_SINGLE_ITEM,
+            widgetLayout = BlazeWidgetLayout.Presets.StoriesWidget.Row.singleItemHorizontalRectangle,
+            playerStyle = BlazeStoryPlayerStyle.base(),
             dataSourceType = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("live-stories")),
             widgetDelegate = Delegates.widgetDelegate
         )
 
         val widgetRowTopStoriesId = "top-stories-widget-row-compose"
-        val widgetRowTopStoriesHandler = WidgetStoriesStateHandler(
+        val widgetRowTopStoriesHandler = BlazeComposeWidgetStoriesStateHandler(
             widgetId = widgetRowTopStoriesId,
-            blazeStoryTheme = BlazeStoriesPresetThemes.WIDGET_HORIZONTAL_RECTANGLE_SINGLE_ITEM,
+            widgetLayout = BlazeWidgetLayout.Presets.StoriesWidget.Row.singleItemHorizontalRectangle,
+            playerStyle = BlazeStoryPlayerStyle.base(),
             dataSourceType = BlazeDataSourceType.Labels(BlazeWidgetLabel.singleLabel("top-stories")),
             widgetDelegate = Delegates.widgetDelegate
         )
@@ -137,7 +140,7 @@ class RecentLeaguesFragment : Fragment() {
                     title = resources.getString(R.string.recent_stories)
                 )
 
-                StoriesWidgetsRow(
+                BlazeComposeStoriesWidgetRowView(
                     modifier = Modifier
                         .height(calculatedRowHeight.dp)
                         .fillMaxWidth(),
@@ -150,7 +153,7 @@ class RecentLeaguesFragment : Fragment() {
                     title = resources.getString(R.string.top_stories)
                 )
 
-                StoriesWidgetsRow(
+                BlazeComposeStoriesWidgetRowView(
                     modifier = Modifier
                         .height(calculatedRowHeight.dp)
                         .fillMaxWidth(),

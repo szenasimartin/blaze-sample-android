@@ -1,10 +1,13 @@
 package com.wscsports.android.blaze.sampleapp
 
 import android.app.Application
-import com.blaze.blazesdk.BlazeSDK
-import com.blaze.blazesdk.core.managers.CachingLevel
-import com.wscsports.android.blaze.sampleapp.ads.custom_native.GoogleCustomNativeAdsHandler
-import com.wscsports.android.blaze.sampleapp.ads.ima.ImaHandler
+import com.blaze.blazesdk.shared.BlazeSDK
+import com.blaze.blazesdk.prefetch.models.BlazeCachingLevel
+import com.blaze.gam.BlazeGAM
+import com.blaze.ima.BlazeIMA
+import com.wscsports.android.blaze.sampleapp.ads.gam.BannerAdsDelegate
+import com.wscsports.android.blaze.sampleapp.ads.gam.CustomNativeAdsDelegate
+import com.wscsports.android.blaze.sampleapp.ads.ima.IMADelegate
 import com.wscsports.android.blaze.sampleapp.core.Delegates
 
 /** Use the [Application] class to initialize the BlazeSDK.
@@ -18,18 +21,31 @@ class Application : Application() {
         BlazeSDK.init(
             // Please provide valid API-KEY here
             apiKey = "[API_KEY]",
-            cachingLevel = CachingLevel.DEFAULT,
+            cachingLevel = BlazeCachingLevel.DEFAULT,
             cachingSize = 512,
-            globalDelegate = Delegates.globalDelegate,
+            sdkDelegate = Delegates.globalDelegate,
             playerEntryPointDelegate = Delegates.playerEntryPointDelegate,
             completionBlock = {
                 logd("BlazeSDK.init completionBlock")
-                BlazeSDK.setGoogleCustomNativeAdsHandler(googleCustomNativeAdsHandler = GoogleCustomNativeAdsHandler(appContext = this))
-                BlazeSDK.setImaHandler(imaHandler = ImaHandler())
+                enableAds()
             },
             errorBlock = { error ->
                 logd("BlazeSDK.init errorBlock -> , Init Error = $error")
             }
+        )
+    }
+
+    private fun enableAds() {
+        BlazeIMA.enableAds(
+            delegate = IMADelegate
+        )
+        BlazeGAM.enableCustomNativeAds(
+            context = applicationContext,
+            delegate = CustomNativeAdsDelegate
+        )
+        BlazeGAM.enableBannerAds(
+            context = applicationContext,
+            delegate = BannerAdsDelegate
         )
     }
 
